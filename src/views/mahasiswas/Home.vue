@@ -24,10 +24,10 @@
           <td>{{ mahasiswas.no_tlp}}</td>
           <td>{{ mahasiswas.email}}</td>
           <td>
-            <router-link class="btn btn-success" :to="{name:'Editmahasiswas', params:
-            {id:data.id}}">Edit</router-link>
+            <router-link class="btn btn-success" :to="{name:'Editmahasiswa', params:
+            {id:mahasiswas.id}}">Edit</router-link>
 
-            <button @click.prevent="mahasiswasDelete(data.id)" class="btn btn-danger">delete</button>
+            <button @click.prevent="mahasiswasDelete(mahasiswas.id)" class="btn btn-danger">delete</button> 
           </td>
         </tr>
       </tbody>
@@ -51,6 +51,7 @@ export default {
     onMounted(() => {
       axios.get('http://127.0.0.1:8000/api/mahasiswas')
       .then(response => {
+        console.log(response.data.data)
         mahasiswas.value = response.data.data
       })
       .catch(error => {
@@ -58,7 +59,7 @@ export default {
       })
     })
     function mahasiswasDelete(id){
-      axios.delete('http://127.0.0.1:8000/api/mahasiswas/${id}')
+      axios.delete('http://127.0.0.1:8000/api/mahasiswas/delete/${id}')
       .then(()=>{
         let z = this.mahasiswas.map(mahasiswas => mahasiswas.id).indexOf(id);
         this.mahasiswas.splice(z, 1)
