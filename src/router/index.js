@@ -15,41 +15,26 @@ const routes = [
   {
     path: '/createmahasiswas',
     name: 'Createmahasiswa',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: Createmahasiswas
   },
   {
     path: '/editmahasiswas/:id',
     name: 'Editmahasiswa',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: Editmahasiswas
   },
   {
     path: '/matakuliahs',
     name: 'Index',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: Index
   },
   {
     path: '/creatematakuliahs',
     name: 'Creatematakuliah',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: Creatematakuliahs
   },
   {
     path: '/editmatakuliahs',
     name: 'Editmatakuliah',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: Editmatakuliahs
   }
 ]

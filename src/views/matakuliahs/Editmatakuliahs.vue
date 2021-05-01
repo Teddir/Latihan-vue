@@ -1,9 +1,9 @@
 <template>
   <div class="card shadow mt-3">
     <div class="card-body">
-      <h5 class="card-title">Edit matakuliah</h5>
+      <h5 class="card-title" style="color: blue">Edit matakuliah</h5>
       <form class="row g-3" @submit.prevent="update">
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <label for="inputEmail4" class="form-label">id</label>
           <input
             type="number"
@@ -14,8 +14,8 @@
           <div class="alert alert-danger" v-if="validation.id">
             {{ validation.id[0] }}
           </div>
-        </div>
-        <div class="col-md-6">
+        </div> -->
+        <div class="col-md-12">
           <label for="inputPassword4" class="form-label">Nama matakuliah</label>
           <input
             type="text"
@@ -56,51 +56,51 @@ export default {
     const matakuliahs = reactive({
       id: "",
       nama_matakuliah: "",
-      sks: ""
-     
+      sks: "",
     });
     const validation = ref([]);
     const router = useRouter();
-    const route = useRoute()
+    const route = useRoute();
+    console.log("ini id ", route.params.id);
     onMounted(() => {
-      axios.get('http://127.0.0.1:8000/api/matakuliahs/${route.params.id}')
-        .then(response  => {
-            console.log(response)
-          matakuliahs.id = response.data.data.id
-          matakuliahs.nama_matakuliah = response.data.data.nama_matakuliah
-          matakuliahs.sks = response.data.data.sks
-         
+      axios
+        .get(`http://127.0.0.1:8000/api/matakuliah-only/${route.params.id}`)
+        .then((response) => {
+          console.log(response.data.data);
+          matakuliahs.id = response.data.data[0].id;
+          matakuliahs.nama_matakuliah = response.data.data[0].nama_matakuliah;
+          matakuliahs.sks = response.data.data[0].sks;
         })
         .catch((error) => {
-          console.log(error.response.data)
-        })
-    })
+          console.log(error.response.data);
+        });
+    });
     function update() {
-      let id = matakuliahs.id
-      let nama_matakuliah = matakuliahs.nama_matakuliah
-      let sks = matakuliahs.sks
-     
-      axios.put('http://127.0.0.1:8000/api/matakuliahs/${route.params.id}',{
+      let id = matakuliahs.id;
+      let nama_matakuliah = matakuliahs.nama_matakuliah;
+      let sks = matakuliahs.sks;
+
+      axios
+        .put(`http://127.0.0.1:8000/api/matakuliahs/update/${id}`, {
           id: id,
           nama_matakuliah: nama_matakuliah,
-          sks: sks
-         
+          sks: sks,
         })
         .then(() => {
           router.push({
-            name: 'Index',
-          })
+            name: "Index",
+          });
         })
         .catch((error) => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     }
     return {
       matakuliahs,
       validation,
       router,
       update,
-      route
+      route,
     };
   },
 };

@@ -1,9 +1,9 @@
 <template>
   <div class="card shadow mt-3">
     <div class="card-body">
-      <h5 class="card-title">Edit mahasiswa</h5>
+      <h5 class="card-title" style="color: blue">Edit mahasiswa</h5>
       <form class="row g-3" @submit.prevent="update">
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <label for="inputEmail4" class="form-label">id</label>
           <input
             type="number"
@@ -14,8 +14,8 @@
           <div class="alert alert-danger" v-if="validation.id">
             {{ validation.id[0] }}
           </div>
-        </div>
-        <div class="col-md-6">
+        </div> -->
+        <div class="col-md-12">
           <label for="inputPassword4" class="form-label">Nama mahasiswa</label>
           <input
             type="text"
@@ -53,7 +53,7 @@
             {{ validation.no_tlp[0] }}
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <label for="inputCity" class="form-label">Email</label>
           <input
             type="text"
@@ -85,32 +85,35 @@ export default {
       nama_mahasiswa: "",
       alamat: "",
       no_tlp: "",
-      email: ""
+      email: "",
     });
     const validation = ref([]);
     const router = useRouter();
-    const route = useRoute()
+    const route = useRoute();
+    console.log("ini id", route.params.id);
     onMounted(() => {
-      axios.get('http://127.0.0.1:8000/api/mahasiswas/${route.params.id}')
-        .then(response  => {
-            console.log(response)
-          mahasiswas.id = response.data.data.id
-          mahasiswas.nama_mahasiswa = response.data.data.nama_mahasiswa
-          mahasiswas.alamat = response.data.data.alamat
-          mahasiswas.no_tlp = response.data.data.no_tlp
-          mahasiswas.email = response.data.data.email
+      axios
+        .get(`http://127.0.0.1:8000/api/mahasiswa-only/${route.params.id}`)
+        .then((response) => {
+          console.log("aishaisiaos", response.data.data);
+          mahasiswas.id = response.data.data[0].id;
+          mahasiswas.nama_mahasiswa = response.data.data[0].nama_mahasiswa;
+          mahasiswas.alamat = response.data.data[0].alamat;
+          mahasiswas.no_tlp = response.data.data[0].no_tlp;
+          mahasiswas.email = response.data.data[0].email;
         })
         .catch((error) => {
-          console.log(error.response.data)
-        })
-    })
+          console.log(error.response.data);
+        });
+    });
     function update() {
-      let id = mahasiswas.id
-      let nama_mahasiswa = mahasiswas.nama_mahasiswa
-      let alamat = mahasiswas.alamat
-      let no_tlp = mahasiswas.no_tlp
-      let email = mahasiswas.email
-      axios.put('http://127.0.0.1:8000/api/mahasiswas/${route.params.id}',{
+      let id = mahasiswas.id;
+      let nama_mahasiswa = mahasiswas.nama_mahasiswa;
+      let alamat = mahasiswas.alamat;
+      let no_tlp = mahasiswas.no_tlp;
+      let email = mahasiswas.email;
+      axios
+        .put(`http://127.0.0.1:8000/api/mahasiswas/update/${id}`, {
           id: id,
           nama_mahasiswa: nama_mahasiswa,
           alamat: alamat,
@@ -118,6 +121,7 @@ export default {
           email: email,
         })
         .then(() => {
+          // console.log("asasasssasa");
           router.push({
             name: "Home",
           });
@@ -131,8 +135,10 @@ export default {
       validation,
       router,
       update,
-      route
+      route,
     };
   },
 };
 </script>
+
+
