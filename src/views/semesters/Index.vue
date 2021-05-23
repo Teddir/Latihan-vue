@@ -3,7 +3,7 @@
     <!-- <Slider /> -->
     <hr class="my-3" />
     <router-link class="btn btn-primary" to="/createsemesters"
-      >Add Semester</router-link
+      >Add semester</router-link
     >
     <table class="table tble-striped">
       <thead>
@@ -39,7 +39,7 @@
 
 <script>
 import axios from "axios";
-// @ is an alias to /sr
+// @ is an alias to /src
 import { onMounted, ref } from "vue";
 export default {
   setup() {

@@ -24,6 +24,20 @@
                 >Matakuliah</router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/absensis">Absensi</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/jadwals">Jadwal</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/kontraks">Kontrak</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/semesters"
+                >Semester</router-link
+              >
+            </li>
           </ul>
         </div>
       </div>

@@ -88,7 +88,7 @@ export default {
         })
         .then(() => {
           router.push({
-            name: "Index",
+            name: "Matakuliah",
           });
         })
         .catch((error) => {
